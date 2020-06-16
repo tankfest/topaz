@@ -36,21 +36,17 @@ CPetController::CPetController(CPetEntity* _PPet) :
 
 void CPetController::Tick(time_point tick)
 {
-    if (PPet->isCharmed && tick > PPet->charmTime)
+    if ((PPet->isCharmed && tick > PPet->charmTime) || ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive()))
     {
         petutils::DespawnPet(PPet->PMaster);
         return;
     }
+    
     CMobController::Tick(tick);
 }
 
 void CPetController::DoRoamTick(time_point tick)
 {
-    if ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive()) {
-        PPet->Die();
-        return;
-    }
-
     //automaton, wyvern
     if (PPet->getPetType() == PETTYPE_WYVERN || PPet->getPetType() == PETTYPE_AUTOMATON) {
         if (PetIsHealing()) {
