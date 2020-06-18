@@ -5,7 +5,7 @@
 -- !pos 83.924 1 110.54 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/settings")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
@@ -38,7 +38,7 @@ function onEventFinish(player,csid,option)
         if player:getQuestStatus(SANDORIA,tpz.quest.id.sandoria.ECO_WARRIOR) == QUEST_AVAILABLE then
             player:addQuest(SANDORIA,tpz.quest.id.sandoria.ECO_WARRIOR)
         end
-        player:setCharVar("EcoStatus", 1)
+        player:setCharVar("EcoStatus", 1) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
     elseif csid == 681 and npcUtil.completeQuest(player, SANDORIA, tpz.quest.id.sandoria.ECO_WARRIOR, {gil = 5000, item = 4198, title = tpz.title.VERMILLION_VENTURER, fame = 80, var = "EcoStatus"}) then
         player:delKeyItem(tpz.ki.INDIGESTED_ORE)
         player:setCharVar("EcoReset",getConquestTally())

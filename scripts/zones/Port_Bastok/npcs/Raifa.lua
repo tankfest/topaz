@@ -5,7 +5,7 @@
 -- !pos -166.416 -8.48 7.153 236
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/settings")
+require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
@@ -38,7 +38,7 @@ function onEventFinish(player,csid,option)
         if player:getQuestStatus(BASTOK,tpz.quest.id.bastok.ECO_WARRIOR) == QUEST_AVAILABLE then
             player:addQuest(BASTOK,tpz.quest.id.bastok.ECO_WARRIOR)
         end
-        player:setCharVar("EcoStatus", 101)
+        player:setCharVar("EcoStatus", 101) -- EcoStatus var:  1 to 3 for sandy // 101 to 103 for bastok // 201 to 203 for windurst
     elseif csid == 282 and npcUtil.completeQuest(player, BASTOK, tpz.quest.id.bastok.ECO_WARRIOR, {gil = 5000, item = 4198, title = tpz.title.CERULEAN_SOLDIER, fame = 80, var = "EcoStatus"}) then
         player:delKeyItem(tpz.ki.INDIGESTED_ORE)
         player:setCharVar("EcoReset",getConquestTally())
