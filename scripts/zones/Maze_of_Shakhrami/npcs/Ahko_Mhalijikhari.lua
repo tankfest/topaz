@@ -18,6 +18,7 @@ function onTrigger(player, npc)
             player:startEvent(62) -- Apply ointment option
         else
             player:startEvent(64) -- Remove ointment option
+        end
     elseif player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) then
             player:startEvent(65) -- After receiving KI, Ahko sends the player to Lumomo     
     else

@@ -23,7 +23,7 @@ function onTrigger(player, npc)
         not GetMobByID(wyrmfly + 1):isSpawned() and
         not GetMobByID(wyrmfly + 2):isSpawned()
     then
-        npcUtil.popFromQM(player, npc, {wyrmfly, wyrmfly + 1, wyrmfly + 2}, {hide = 0})
+        npcUtil.popFromQM(player, npc, {wyrmfly, wyrmfly + 1, wyrmfly + 2}, {claim=true, look=true, hide = 0})
     elseif player:getCharVar("EcoStatus") == 202 and not player:hasKeyItem(tpz.ki.INDIGESTED_MEAT) then
         npcUtil.giveKeyItem(player, tpz.ki.INDIGESTED_MEAT)
     else
