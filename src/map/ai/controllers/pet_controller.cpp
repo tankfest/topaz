@@ -36,7 +36,7 @@ CPetController::CPetController(CPetEntity* _PPet) :
 
 void CPetController::Tick(time_point tick)
 {
-    if ((PPet->isCharmed && tick > PPet->charmTime) || ((PPet->PMaster == nullptr || PPet->PMaster->isDead()) && PPet->isAlive()))
+    if ((PPet->isCharmed && tick > PPet->charmTime) || ((PPet->PMaster == nullptr) && PPet->isAlive()))
     {
         petutils::DespawnPet(PPet->PMaster);
         return;

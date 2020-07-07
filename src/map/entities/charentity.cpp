@@ -1656,6 +1656,7 @@ void CCharEntity::Die()
     else
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_FALLS_TO_GROUND));
 
+    petutils::DetachPet(PMaster)
     battleutils::RelinquishClaim(this);
     Die(death_duration);
     SetDeathTimestamp((uint32)time(nullptr));
