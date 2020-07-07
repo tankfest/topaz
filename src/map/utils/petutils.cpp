@@ -1246,13 +1246,6 @@ namespace petutils
     *																		*
     ************************************************************************/
 
-    void DespawnPet(CBattleEntity* PMaster)
-    {
-        TPZ_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
-
-        petutils::DetachPet(PMaster);
-    }
-
     int16 PerpetuationCost(uint32 id, uint8 level)
     {
         int16 cost = 0;
