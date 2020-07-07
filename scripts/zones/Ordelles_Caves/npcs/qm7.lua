@@ -15,13 +15,8 @@ function onTrade(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local necroplasm = ID.mob.NECROPLASM
-    if
-        player:getCharVar("EcoStatus") == 1 and
-        player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) and
-        not GetMobByID(necroplasm):isSpawned()
-    then
-        npcUtil.popFromQM(player, npc, necroplasm, {claim=true, look=true, hide = 0})
+    if player:getCharVar("EcoStatus") == 1 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
+        npcUtil.popFromQM(player, npc, ID.mob.NECROPLASM, {claim=true, look=true, hide = 0})
     elseif player:getCharVar("EcoStatus") == 2 and not player:hasKeyItem(tpz.ki.INDIGESTED_STALAGMITE) then
         npcUtil.giveKeyItem(player, tpz.ki.INDIGESTED_STALAGMITE)
     else

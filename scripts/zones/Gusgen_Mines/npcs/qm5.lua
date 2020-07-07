@@ -16,12 +16,8 @@ end
 
 function onTrigger(player, npc)
     local pudding = ID.mob.PUDDING_OFFSET
-    if
-        player:getCharVar("EcoStatus") == 101 and
-        player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) and
-        not GetMobByID(pudding):isSpawned() and
-        not GetMobByID(pudding + 1):isSpawned()
-    then
+    
+    if player:getCharVar("EcoStatus") == 101 and player:hasStatusEffect(tpz.effect.LEVEL_RESTRICTION) then
         npcUtil.popFromQM(player, npc, {pudding, pudding + 1}, {claim=true, look=true, hide = 0})
     elseif player:getCharVar("EcoStatus") == 102 and not player:hasKeyItem(tpz.ki.INDIGESTED_ORE) then
         npcUtil.giveKeyItem(player, tpz.ki.INDIGESTED_ORE)
