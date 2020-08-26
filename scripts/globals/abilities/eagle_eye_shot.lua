@@ -28,30 +28,23 @@ function onAbilityCheck(player, target, ability)
 end
 
 function onUseAbility(player, target, ability, action)
+    local accBonus = 100
+    local damage = 0
+
     if (player:getWeaponSkillType(tpz.slot.RANGED) == tpz.skill.MARKSMANSHIP) then
         action:animation(target:getID(), action:animation(target:getID()) + 1)
     end
-    local params = {}
-    params.numHits = 1
-    local ftp = 5
-    params.ftp100 = ftp params.ftp200 = ftp params.ftp300 = ftp
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = true
-    params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
-    params.enmityMult = 0.5
-
-    local damage, criticalHit, tpHits, extraHits = doRangedWeaponskill(player, target, 0, params, 0, action, true)
-
-    -- Set the message id ourselves
-    if (tpHits + extraHits > 0) then
-        action:messageID(target:getID(), tpz.msg.basic.JA_DAMAGE)
-        action:speceffect(target:getID(), 32)
-    else
+    if getRangedHitRate(player, target, false, accBonus) <= math.random() then -- EES misses
         action:messageID(target:getID(), tpz.msg.basic.JA_MISS_2)
         action:speceffect(target:getID(), 0)
+    else
+        damage = player:getRangedDmg() * 7.5 -- Weapon Damage * 5 (* 1.5 for ranged damage multiplier)
+        target:takeDamage(damage, mob, tpz.attackType.RANGED, tpz.damageType.PIERCING)
+        target:updateEnmityFromDamage(player, damage)
+        action:messageID(target:getID(), tpz.msg.basic.JA_DAMAGE)
+        action:speceffect(target:getID(), 32)
     end
-
+    
+    player:removeAmmo()
     return damage
 end
